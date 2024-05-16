@@ -1,6 +1,7 @@
 mod db;
 
 mod operations {
+  pub mod help;
   pub mod convert;
   pub mod display;
   // pub mod unhash;
@@ -8,7 +9,7 @@ mod operations {
 
 use std::error::Error;
 use colored::*;
-use operations::{convert, display};
+use operations::{help, convert, display};
 
 pub struct Config {
   pub operation: String,
@@ -18,12 +19,12 @@ pub struct Config {
 
 impl Config {
   pub fn new(args: &[String]) -> Result<Config, &str> {
-    if args.len() < 3 {
-      println!("{}", "Use at least 3 arguments".red())
+    if args.len() < 1 {
+      println!("{}", "Use at least 1 arguments".red())
     }
 
     let operation = args[1].clone();
-    let arg2 = args[2].clone();
+    let arg2 = args.get(2).cloned().unwrap_or_else(|| String::from("-a"));
     let arg3 = args.get(3).cloned().unwrap_or_else(|| String::from("-a"));
 
     Ok(Config { operation, arg2, arg3 })
@@ -32,6 +33,9 @@ impl Config {
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
   match config.operation.as_str() {
+    "help" => {
+      help::help_center();
+    }
     "cvert" => {
       convert::convert_link(&config.arg2)?;
     }
@@ -41,7 +45,10 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
           display::display_stored_links()?;
         }
         _ => {
-          println!("");
+          println!("You mean:");
+          println!("`cargo run show all`");
+          println!("\tOR");
+          println!("`cutlink show all`")
         }
       }
     }

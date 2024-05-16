@@ -25,7 +25,7 @@ pub fn convert_link(link: &String) -> Result<(), Error> {
     &[link, &random_string],
   ) {
     Ok(_) => {
-      println!("Your shorted link is {}", random_string);
+      println!("Your shorted link is cut.link/{}", random_string);
       Ok(())
     },
     Err(err) => {
