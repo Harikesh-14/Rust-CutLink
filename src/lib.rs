@@ -23,7 +23,7 @@ impl Config {
     }
 
     let operation = args[1].clone();
-    let arg2 = args[2].clone();
+    let arg2 = args.get(2).cloned().unwrap_or_else(|| String::from("-a"));
     let arg3 = args.get(3).cloned().unwrap_or_else(|| String::from("-a"));
 
     Ok(Config { operation, arg2, arg3 })
@@ -32,6 +32,9 @@ impl Config {
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
   match config.operation.as_str() {
+    "help" => {
+      println!("The Book: CutLink");
+    }
     "cvert" => {
       convert::convert_link(&config.arg2)?;
     }
