@@ -2,7 +2,7 @@ use std::env;
 use cutlink::Config;
 
 fn main() {
-    println!("Welcome to CutLink ✂️");
+    println!("\tWelcome to CutLink ✂️");
 
     let args:Vec<String> = env::args().collect();
 
