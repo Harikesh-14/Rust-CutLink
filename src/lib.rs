@@ -4,12 +4,12 @@ mod operations {
   pub mod help;
   pub mod convert;
   pub mod display;
-  // pub mod unhash;
+  pub mod delete;
 }
 
 use std::error::Error;
 use colored::*;
-use operations::{help, convert, display};
+use operations::{help, convert, display, delete};
 
 pub struct Config {
   pub operation: String,
@@ -51,6 +51,11 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
           println!("`cutlink show all`")
         }
       }
+    }
+    "delete" => {
+      let code = config.arg2;
+      let code = code.trim().parse().expect("Expected an integer");
+      delete::delete_link(code)?;
     }
     _ => {
       println!("Unknown operation")
