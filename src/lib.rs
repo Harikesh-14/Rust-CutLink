@@ -53,12 +53,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
       }
     }
     _ => {
-      println!("These are only the available operations: ");
-      println!("1. Convert (Hashing)");
-      println!("2. Show");
-      println!("3. Unhash");
-      println!("4. Delete");
-      println!("5. Search");
+      println!("Unknown operation")
     }
   }
 

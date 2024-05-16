@@ -18,21 +18,29 @@ pub fn display_stored_links() -> Result<(), Error> {
     })
   })?;
 
+  println!("\nStored Links:");
+  println!("=========================================================================");
+  println!("{:<6} | {:<40} | {:<20}", "ID", "Original Link", "Shortened Link");
+  println!("-------------------------------------------------------------------------");
   for i in links_iter {
     match i {
       Ok(link) => {
         let curr_id = link.id;
         let curr_original_link = link.original_link;
-        let curr_hashed_link = link.hashed_link;
+        let curr_hashed_link = format_link(&link.hashed_link);
 
-        println!("[{}]. {} --> cut.link/{}", curr_id, curr_original_link, curr_hashed_link);
+        println!("{:<6} | {:<40} | {}", curr_id, curr_original_link, curr_hashed_link);
       }
-
       Err(err) => {
         eprintln!("Error processing task: {}", err);
       }
     }
   }
+  println!("=========================================================================");
 
   Ok(())
+}
+
+fn format_link(link: &str) -> String {
+  format!("cut.link/{}", link)
 }
