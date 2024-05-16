@@ -5,11 +5,12 @@ mod operations {
   pub mod convert;
   pub mod display;
   pub mod delete;
+  pub mod clear;
 }
 
 use std::error::Error;
 use colored::*;
-use operations::{help, convert, display, delete};
+use operations::{help, convert, display, delete, clear};
 
 pub struct Config {
   pub operation: String,
@@ -56,6 +57,9 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
       let code = config.arg2;
       let code = code.trim().parse().expect("Expected an integer");
       delete::delete_link(code)?;
+    }
+    "clear" => {
+      clear::clear_table()?;
     }
     _ => {
       println!("Unknown operation")
