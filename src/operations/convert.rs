@@ -25,12 +25,20 @@ pub fn convert_link(link: &String) -> Result<(), Error> {
     &[link, &random_string],
   ) {
     Ok(_) => {
-      println!("Your shorted link is cut.link/{}", random_string);
+      println!("\nLink successfully shortened:");
+      println!("===================================");
+      println!("Original Link: {}", link);
+      println!("Shortened Link: {}", format_link(&random_string));
+      println!("===================================");
       Ok(())
-    },
+    }
     Err(err) => {
-      eprintln!("Error hashing the link: {}", err);
+      eprintln!("Error shortening the link: {}", err);
       Err(err)
     }
   }
+}
+
+fn format_link(link: &str) -> String {
+  format!("cut.link/{}", link)
 }
