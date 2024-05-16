@@ -41,7 +41,10 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
           display::display_stored_links()?;
         }
         _ => {
-          println!("");
+          println!("You mean:");
+          println!("`cargo run show all`");
+          println!("\tOR");
+          println!("`cutlink show all`")
         }
       }
     }
