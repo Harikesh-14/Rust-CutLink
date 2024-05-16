@@ -20,16 +20,18 @@ pub fn display_stored_links() -> Result<(), Error> {
 
   println!("\nStored Links:");
   println!("======================================================================");
-  println!("{:<3} | {:<58} | {:<20}", "ID", "Original Link", "Shortened Link");
+  println!("{:<4} | {:<40} | {:<20}", "ID", "Original Link", "Shortened Link");
   println!("----------------------------------------------------------------------");
   for i in links_iter {
     match i {
       Ok(link) => {
         let curr_id = link.id;
-        let curr_original_link = link.original_link;
+        let curr_original_link = format_original_link(&link.original_link);
+
+        // Format hashed link
         let curr_hashed_link = format_link(&link.hashed_link);
 
-        println!("{:<3} | {:<58} | {}", curr_id, curr_original_link, curr_hashed_link);
+        println!("{:<4} | {:<40} | {}", curr_id, curr_original_link, curr_hashed_link);
       }
       Err(err) => {
         eprintln!("Error processing task: {}", err);
@@ -39,6 +41,15 @@ pub fn display_stored_links() -> Result<(), Error> {
   println!("======================================================================");
 
   Ok(())
+}
+
+fn format_original_link(link: &str) -> String {
+  if link.len() <= 40 {
+    link.to_string()
+  } else {
+    let truncated_link = &link[..37];
+    format!("{}...", truncated_link)
+  }
 }
 
 fn format_link(link: &str) -> String {
