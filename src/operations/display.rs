@@ -18,7 +18,7 @@ pub fn display_stored_links() -> Result<(), Error> {
     })
   })?;
 
-  println!("\nStored Links:");
+  println!("\n                          STORED LINKS\n");
   println!("======================================================================");
   println!("{:<4} | {:<40} | {:<20}", "ID", "Original Link", "Shortened Link");
   println!("----------------------------------------------------------------------");

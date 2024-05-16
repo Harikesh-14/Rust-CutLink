@@ -1,10 +1,14 @@
+use colored::*;
 use std::env;
 use cutlink::Config;
 
 fn main() {
-    println!("\tWelcome to CutLink ✂️");
+    println!();
+    println!("{}", "======================================================================".cyan());
+    println!("{}", "                      Welcome to CutLink ✂️".cyan());
+    println!("{}", "======================================================================".cyan());
 
-    let args:Vec<String> = env::args().collect();
+    let args: Vec<String> = env::args().collect();
 
     let config = Config::new(&args).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {}", err);
