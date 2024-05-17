@@ -1,14 +1,16 @@
+use colored::*;
+
 pub fn help_center() {
-  println!("\n===============================");
-  println!("        📘 The Book: CutLink 📘");
-  println!("===============================");
-  println!("\tWelcome to CutLink Help Center");
-  println!("-------------------------------");
-  println!("\t🛠️ Available Commands:");
-  println!("  cvert [URL]      Shorten a URL");
-  println!("  show all         List all shortened URLs");
-  println!("  get [CODE]       Retrieve a shortened URL by code");
-  println!("  delete [CODE]    Delete a shortened URL by code");
-  println!("  help             Show this help message");
-  println!("-------------------------------");
+  println!("{}", "======================================================================".cyan());
+  println!("{}", "                  📘 The Book: CutLink 📘".cyan());
+  println!("{}", "======================================================================".cyan());
+  println!("{}", "                Welcome to CutLink Help Center".cyan());
+  println!("{}", "----------------------------------------------------------------------".cyan());
+  println!("{}", "                  🛠️ Available Commands:".bright_green());
+  println!("{}", "  cvert [URL]              Shorten a URL".bright_green());
+  println!("{}", "  show all                 List all shortened URLs".bright_green());
+  println!("{}", "  search -ol/-sl [CODE]    Retrieve a shortened URL by code".bright_green());
+  println!("{}", "  delete [CODE]            Delete a shortened URL by code".bright_green());
+  println!("{}", "  help                     Show this help message".bright_green());
+  println!("{}", "----------------------------------------------------------------------".cyan());
 }
