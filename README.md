@@ -8,7 +8,6 @@ CutLink is a URL shortening service written in Rust. This application allows use
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Explanation
 
