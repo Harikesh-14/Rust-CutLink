@@ -43,7 +43,7 @@ pub fn display_stored_links() -> Result<(), Error> {
   Ok(())
 }
 
-fn format_original_link(link: &str) -> String {
+pub(crate) fn format_original_link(link: &str) -> String {
   if link.len() <= 40 {
     link.to_string()
   } else {
@@ -52,6 +52,6 @@ fn format_original_link(link: &str) -> String {
   }
 }
 
-fn format_link(link: &str) -> String {
+pub(crate) fn format_link(link: &str) -> String {
   format!("cut.link/{}", link)
 }

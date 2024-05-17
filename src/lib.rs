@@ -7,11 +7,12 @@ mod operations {
   pub mod delete;
   pub mod clear;
   pub mod search;
+  pub mod list;
 }
 
 use std::error::Error;
 use colored::*;
-use operations::{help, convert, display, delete, clear, search};
+use operations::{help, convert, display, delete, clear, search, list};
 
 pub struct Config {
   pub operation: String,
@@ -78,6 +79,24 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     }
     "clear" => {
       clear::clear_table()?;
+    }
+    "list" => {
+      let flag = config.arg2.as_str();
+
+      match flag {
+        "-ol" => {
+          list::list_link_original(&config.arg3)?;
+        }
+        "-sl" => {
+          list::list_link_shortened(&config.arg3)?;
+        }
+        _ => {
+          println!("Invalid flag: {}", flag);
+          println!("Usage:");
+          println!("  list -ol <link>  (for finding the original link)");
+          println!("  list -sl <link>  (for finding the shortened link)");
+        }
+      }
     }
     _ => {
       println!("Unknown operation")
