@@ -11,7 +11,7 @@ pub fn list_link_original(link: &String) -> Result<(), Error> {
   let conn = create_connections()?;
   let pattern = format!("%{}%", link);
   let mut stmt = conn.prepare(
-    "SELECT link, hashed_link FROM links WHERE link LIKE ?1"
+    "SELECT id, link, hashed_link FROM links WHERE link LIKE ?1"
   )?;
   let link_iter = stmt.query_map(params![pattern], |row| {
     Ok(LinkFormat {
@@ -30,10 +30,7 @@ pub fn list_link_original(link: &String) -> Result<(), Error> {
       Ok(link) => {
         let curr_id = link.id;
         let curr_original_link = crate::operations::display::format_original_link(&link.original_link);
-
-        // Format hashed link
         let curr_hashed_link = crate::operations::display::format_link(&link.hashed_link);
-
         println!("{:<4} | {:<40} | {}", curr_id, curr_original_link, curr_hashed_link);
       }
       Err(err) => {
@@ -50,7 +47,7 @@ pub fn list_link_shortened(link: &String) -> Result<(), Error> {
   let conn = create_connections()?;
   let pattern = format!("%{}%", link);
   let mut stmt = conn.prepare(
-    "SELECT link, hashed_link FROM links WHERE hashed_link LIKE ?1"
+    "SELECT id, link, hashed_link FROM links WHERE hashed_link LIKE ?1"
   )?;
   let link_iter = stmt.query_map(params![pattern], |row| {
     Ok(LinkFormat {
@@ -69,10 +66,7 @@ pub fn list_link_shortened(link: &String) -> Result<(), Error> {
       Ok(link) => {
         let curr_id = link.id;
         let curr_original_link = crate::operations::display::format_original_link(&link.original_link);
-
-        // Format hashed link
         let curr_hashed_link = crate::operations::display::format_link(&link.hashed_link);
-
         println!("{:<4} | {:<40} | {}", curr_id, curr_original_link, curr_hashed_link);
       }
       Err(err) => {
